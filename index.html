@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light">
 <title>Seoul Dreamin' 리포트</title>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
@@ -11,48 +12,28 @@
 <!-- Geist, Geist Mono, Noto Sans KR: Builder Central 도식 SVG가 쓰는 글꼴. Geist Mono는 코드에도 쓴다 -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;600&display=swap">
 <style>
-/* Layout: 원페이지 사이트. 고정 상단 메뉴, 남색 첫 화면, 흰 01(색 카드 2장), 남색 02(반투명 카드 7장, Builder Central 상세는 대화창), 흰 03(숫자 대비), 연파랑 04(두 열), 흰 05(조건 카드 3장), 진남색 푸터 */
+/* Layout: 원페이지 사이트, 밝은 테마 고정(다크 모드 전환 없음). 고정 상단 메뉴(연파랑, 스크롤하면 흰 바탕과 경계선), 연파랑 첫 화면, 흰 01(진한 카드 2장: Headless 360 띠 3개, 화면 만들기 띠 2개), 연파랑 02(흰 요약 카드 7장, Builder Central 상세는 대화창), 흰 03(숫자 대비), 연파랑 04(두 열), 흰 05(조건 카드 3장), 진남색 푸터. 진한 색은 01 카드 2장과 푸터에만 쓴다 */
 :root {
   --navy: #0A2B6B; --navy-deep: #00183F; --blue: #0176D3;
   --bg: #ffffff; --bg-sky: #EAF5FE; --bg-soft: #F3F7FC; --surface: #ffffff;
   --ink: #0B1F3F; --muted: #54698D; --line: #DCE5F0;
   --accent: #0176D3; --accent-soft: #EAF5FE; --accent-ink: #0B5CAB; /* 연파랑 면 위 작은 글자용. #0176D3은 연파랑 위 4.2:1이라 쓰지 않는다 */
   --good: #2E844A; --bad: #C23934; --bad-soft: #FDEEEC; --bad-line: #F2C4BF;
-  --on-navy: #ffffff; --on-navy-muted: rgba(255, 255, 255, 0.74); --on-navy-link: #9FD3FF;
-  --glass: rgba(255, 255, 255, 0.07); --glass-strong: rgba(255, 255, 255, 0.16); --glass-line: rgba(255, 255, 255, 0.16);
-  --good-on-navy: #8BE3AE; --bad-on-navy: #FFA79C;
-  --caps-from: #2a2f8f; --caps-to: #121548; /* 소개 이미지 뒤 바탕. 그림 안 색과 맞춘 값이라 두 테마 같음 */
+  --caps-from: #2a2f8f; --caps-to: #121548; /* 소개 이미지 뒤 바탕. 그림 안 색과 맞춘 값 */
   --media: #111521;
-  --diagram-bg: #f5f5f5; /* 도식 SVG가 자기 바탕을 #f5f5f5로 칠하므로 두 테마 모두 같은 값 */
-  --focus: #0B5CAB; /* 키보드 포커스 링. 남색, 파랑 면과 대화창 안에서는 흰색으로 바꾼다 */
+  --diagram-bg: #f5f5f5; /* 도식 SVG가 자기 바탕을 #f5f5f5로 칠하므로 같은 값 */
+  --focus: #0B5CAB; /* 키보드 포커스 링. 01 진한 카드, 푸터, 확대 창과 영상 창 안에서는 흰색으로 바꾼다 */
   --font-body: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
-  color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0A1222; --bg-sky: #0E1B31; --bg-soft: #13203A; --surface: #111C31;
-    --ink: #E9EFF8; --muted: #A2B2CB; --line: #24324D;
-    --accent: #5AB0F5; --accent-soft: #14294A; --accent-ink: #5AB0F5;
-    --good: #6FD39A; --bad: #FF8A7E; --bad-soft: #2E1719; --bad-line: #6A2D2A;
-    --focus: #8CCBFF;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0A1222; --bg-sky: #0E1B31; --bg-soft: #13203A; --surface: #111C31;
-  --ink: #E9EFF8; --muted: #A2B2CB; --line: #24324D;
-  --accent: #5AB0F5; --accent-soft: #14294A; --accent-ink: #5AB0F5;
-  --good: #6FD39A; --bad: #FF8A7E; --bad-soft: #2E1719; --bad-line: #6A2D2A;
-  --focus: #8CCBFF;
-  color-scheme: dark;
+  color-scheme: light; /* 시스템이 다크 모드여도 밝게 둔다. 다크 모드 규칙은 두지 않는다 */
 }
 :root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.7; word-break: keep-all; overflow-wrap: anywhere; -webkit-font-smoothing: antialiased; }
-body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--navy); z-index: 20; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--bg-sky); z-index: 20; }
+html.is-scrolled body::before { background: #ffffff; }
 img { max-width: 100%; }
 [hidden] { display: none !important; }
 h1, h2, h3, h4 { margin: 0; text-wrap: balance; }
@@ -64,30 +45,27 @@ code { font-family: var(--font-mono); font-size: 0.86em; background: var(--accen
 .band { padding-block: clamp(64px, 9vw, 112px); }
 .band-light { background: var(--bg); }
 .band-sky { background: var(--bg-sky); }
-.band-navy { background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%); color: var(--on-navy); }
+/* 첫 화면: 연파랑 바탕, 남색 글자 */
+.band-hero { background: var(--bg-sky); color: var(--navy-deep); }
 section[id] { scroll-margin-top: 72px; }
 
-/* 상단 메뉴 */
-.topnav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: var(--navy); color: var(--on-navy); border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+/* 상단 메뉴: 첫 화면과 같은 연파랑. 스크롤하면 흰 바탕과 얇은 경계선(is-scrolled는 JS가 붙인다) */
+.topnav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg-sky); color: var(--navy); border-bottom: 1px solid transparent; transition: background-color 0.2s ease, border-color 0.2s ease; }
+html.is-scrolled .topnav { background: #ffffff; border-bottom-color: var(--line); }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 6px 24px; min-height: 64px; }
 .wordmark { color: #ffffff; text-decoration: none; font-weight: 800; font-size: 18px; letter-spacing: -0.04em; white-space: nowrap; }
+.topnav .wordmark { color: var(--navy-deep); }
 .topnav nav { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; min-width: 0; }
 .topnav nav::-webkit-scrollbar { display: none; }
-.topnav nav a { color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 15px; font-weight: 600; padding: 8px 14px; border-radius: 999px; white-space: nowrap; }
-.topnav nav a:hover { background: rgba(255, 255, 255, 0.12); color: #ffffff; }
+.topnav nav a { color: var(--navy); text-decoration: none; font-size: 15px; font-weight: 600; padding: 8px 14px; border-radius: 999px; white-space: nowrap; }
+.topnav nav a:hover { background: rgba(10, 43, 107, 0.08); color: var(--navy-deep); }
 
 /* 첫 화면 */
 /* 1280x800에서 01 제목과 첫 카드 머리까지 한 화면에 보이도록 낮게 둔다 */
 .hero { padding-block: clamp(32px, 3vw, 36px) clamp(36px, 3.2vw, 40px); }
 .hero h1 { font-size: clamp(36px, 7.4vw, 56px); font-weight: 800; letter-spacing: -0.06em; line-height: 1.12; }
-.hero .lede { margin-top: 14px; font-size: clamp(16px, 1.6vw, 18px); line-height: 1.6; color: rgba(255, 255, 255, 0.9); max-width: 34em; }
-.hero .when { margin-top: 6px; font-size: 14px; color: var(--on-navy-muted); font-variant-numeric: tabular-nums; }
-.verdict { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; }
-.pill { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: 999px; background: var(--glass-strong); color: #ffffff; font-size: 15px; font-weight: 600; white-space: nowrap; }
-.pill b { font-size: 18px; font-weight: 800; font-variant-numeric: tabular-nums; }
-.dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
-.pill.ok .dot { background: var(--good-on-navy); }
-.pill.no .dot { background: var(--bad-on-navy); }
+.hero .lede { margin-top: 14px; font-size: clamp(16px, 1.6vw, 18px); line-height: 1.6; color: var(--navy); max-width: 34em; }
+.hero .when { margin-top: 6px; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
 
 .hero-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 48px; align-items: center; }
 /* Seoul Dreamin' 이미지 자리. 사용 확인 전이라 비워 둔다. 비어 있으면 자리를 차지하지 않고 글이 한 열을 쓴다 */
@@ -100,10 +78,8 @@ section[id] { scroll-margin-top: 72px; }
 /* 섹션 머리 */
 .sec-head { display: grid; gap: 14px; margin-bottom: clamp(32px, 5vw, 56px); }
 .num { font-size: 15px; font-weight: 700; color: var(--accent-ink); font-variant-numeric: tabular-nums; }
-.band-navy .num { color: var(--on-navy-link); }
 h2 { font-size: clamp(32px, 4.6vw, 52px); font-weight: 800; letter-spacing: -0.05em; line-height: 1.16; }
 .sec-intro { font-size: clamp(16px, 1.6vw, 18px); color: var(--muted); max-width: 44em; }
-.band-navy .sec-intro { color: var(--on-navy-muted); }
 
 /* 그림 */
 figure { margin: 0; display: grid; gap: 8px; min-width: 0; align-content: start; }
@@ -114,19 +90,12 @@ figure.bc img { aspect-ratio: auto 1600 / 724; object-fit: contain; object-posit
 figure.bc.setup-shot img { aspect-ratio: auto 1600 / 465; }
 figcaption { font-size: 14px; color: var(--muted); }
 figcaption b { color: var(--ink); font-weight: 700; margin-right: 6px; font-variant-numeric: tabular-nums; }
-.band-navy figure > button { border-color: var(--glass-line); }
-.band-navy figcaption { color: var(--on-navy-muted); }
-.band-navy figcaption b { color: #ffffff; }
 
 /* 영상 버튼 */
 .vbtn { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; padding: 5px 14px 5px 5px; border-radius: 999px; font-size: 14px; font-weight: 600; line-height: 1.4; background: var(--accent-soft); color: var(--accent-ink); white-space: nowrap; }
 .vbtn svg { width: 26px; height: 26px; padding: 8px 7px 8px 9px; border-radius: 50%; background: var(--accent); color: #ffffff; box-sizing: border-box; flex: none; }
 .vbtn:hover { box-shadow: inset 0 0 0 1px var(--accent); }
-.band-navy .vbtn { background: var(--glass-strong); color: #ffffff; }
-.band-navy .vbtn svg { background: #ffffff; color: var(--navy-deep); }
-.band-navy .vbtn:hover { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6); }
 .links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; font-size: 14px; }
-.band-navy .links a { color: var(--on-navy-link); }
 
 /* 01 달라지는 점: 기존 방식 그림 → 이제(입력 문장과 숫자) */
 .tracks { display: grid; gap: 24px; }
@@ -147,6 +116,20 @@ figcaption b { color: var(--ink); font-weight: 700; margin-right: 6px; font-vari
 .flow-title { font-size: 20px; font-weight: 700; letter-spacing: -0.035em; }
 .flow-row { display: grid; grid-template-columns: minmax(0, 6fr) auto minmax(0, 5fr); gap: 20px; align-items: center; }
 .flow-row.bc { grid-template-columns: minmax(0, 4fr) auto minmax(0, 7fr); }
+/* 필드 만들기: 기존 방식은 그림 없이 설명 상자라 왼쪽을 좁힌다. 고객 시연용 화면: 오른쪽에 이제 두 칸(HXL, React) */
+.flow-row.note { grid-template-columns: minmax(0, 4fr) auto minmax(0, 7fr); }
+.flow-row.duo-row { grid-template-columns: minmax(0, 5fr) auto minmax(0, 6fr); }
+/* 두 칸의 이름, 설명 상자, 결과 그림 행을 subgrid로 맞춰 그림 시작선이 같게 한다 */
+.duo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto auto auto; column-gap: 20px; row-gap: 12px; }
+.duo-item { display: grid; grid-row: span 3; grid-template-rows: subgrid; gap: 12px; align-content: start; min-width: 0; }
+.duo-name { margin: 0; font-size: 17px; font-weight: 700; letter-spacing: -0.03em; }
+.duo .stat b { font-size: clamp(30px, 3.2vw, 40px); }
+/* 화면 만들기 카드의 띠별 환경. 진남색 위 78% 흰색은 10.8:1 */
+.flow-env { font-size: 14px; font-weight: 600; color: rgba(255, 255, 255, 0.78); margin-top: -8px; }
+/* 그림 없는 기존 방식 설명 상자. 파랑 면 위에서는 바탕을 어둡게 겹쳐 흰 글자 대비를 올린다(6.4:1) */
+.before-box { border-radius: 16px; padding: 14px 18px 16px; display: grid; gap: 6px; background: rgba(0, 24, 63, 0.24); color: #ffffff; }
+.before-box p { font-size: 15.5px; line-height: 1.65; }
+.cap-note { display: block; margin-top: 2px; font-size: 14px; font-weight: 500; }
 .flow-arrow { font-size: 32px; font-weight: 300; line-height: 1; color: #ffffff; justify-self: center; }
 .flow-tag { justify-self: start; font-size: 13px; font-weight: 700; padding: 3px 11px; border-radius: 999px; background: rgba(255, 255, 255, 0.18); color: #ffffff; }
 .flow-before, .flow-result { gap: 10px; }
@@ -173,30 +156,30 @@ figcaption b { color: var(--ink); font-weight: 700; margin-right: 6px; font-vari
 .tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .tag { font-size: 13px; font-weight: 600; padding: 5px 13px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.6); color: #ffffff; }
 
-/* 02 실습 기록 */
-.comps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
-.comp { background: var(--glass); border: 1px solid var(--glass-line); border-radius: 20px; padding: 14px 14px 22px; display: grid; gap: 12px; align-content: start; min-width: 0; }
-.comp > :not(figure) { margin-inline: 6px; }
-.comp h3 { font-size: 21px; font-weight: 700; letter-spacing: -0.035em; line-height: 1.3; }
-.comp p { font-size: 15px; color: var(--on-navy-muted); }
-.comp.wide { grid-column: 1 / -1; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); column-gap: 24px; padding: 14px; }
-.comp-body { display: grid; gap: 12px; align-content: start; min-width: 0; padding: 8px 8px 8px 0; }
+/* 02 실습 기록: 요약 카드. 작은 그림(누르면 확대) 옆에 상태, 이름, 한 문장, 영상과 문서 */
+.comps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.comp { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 16px; box-shadow: 0 1px 2px rgba(10, 43, 107, 0.05), 0 6px 18px rgba(10, 43, 107, 0.06); display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 14px; align-items: start; min-width: 0; }
+.comp figure > button { border-radius: 10px; }
+.comp h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.035em; line-height: 1.3; }
+.comp p { font-size: 14.5px; line-height: 1.6; color: var(--muted); }
+.comp.wide { grid-column: 1 / -1; }
+.comp-body { display: grid; gap: 8px; align-content: start; min-width: 0; }
 .status { display: flex; flex-wrap: wrap; gap: 6px; }
-.state { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; padding: 3px 11px; border-radius: 999px; background: rgba(255, 255, 255, 0.1); color: #ffffff; }
+.state { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; padding: 2px 10px; border-radius: 999px; background: var(--bg-soft); border: 1px solid var(--line); color: var(--ink); }
 .state::before { content: ""; width: 7px; height: 7px; border-radius: 50%; }
-.state.ok::before { background: var(--good-on-navy); }
-.state.no::before { background: var(--bad-on-navy); }
+.state.ok::before { background: var(--good); }
+.state.no::before { background: var(--bad); }
 
 /* Builder Central 상세: 02 카드의 자세히 보기로 여는 대화창(#bc-modal) 안에 있다 */
 .detail { display: grid; gap: 24px; min-width: 0; }
 .diagram { background: var(--diagram-bg); border-radius: 20px; overflow-x: auto; }
 .diagram svg { display: block; width: 100%; min-width: 1160px; height: auto; }
 .gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px 20px; }
-.detail-note { margin-top: 16px; font-size: 16px; color: var(--on-navy-muted); }
+.detail-note { margin-top: 16px; font-size: 16px; color: var(--muted); }
 .caps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
 .cap { display: grid; gap: 8px; align-content: start; min-width: 0; }
 .cap h4 { font-size: 17px; font-weight: 700; letter-spacing: -0.03em; }
-.cap p { font-size: 14px; color: var(--on-navy-muted); }
+.cap p { font-size: 14px; color: var(--muted); }
 .caps figure > button { background: linear-gradient(160deg, var(--caps-from), var(--caps-to)); border: 0; }
 .caps figure img { aspect-ratio: 1 / 1; object-fit: contain; object-position: center; }
 
@@ -266,7 +249,7 @@ dialog.zoom img { display: block; max-width: 100%; max-height: 84vh; width: auto
 .zoom-bar { display: flex; justify-content: space-between; gap: 12px; align-items: center; color: #e8ebf3; font-size: 14px; padding: 10px 2px 0; }
 
 @media (max-width: 960px) {
-  .flow-row, .flow-row.bc { grid-template-columns: minmax(0, 1fr); }
+  .flow-row, .flow-row.bc, .flow-row.note, .flow-row.duo-row { grid-template-columns: minmax(0, 1fr); }
   .flow-arrow { transform: rotate(90deg); }
   .hero-grid { grid-template-columns: minmax(0, 1fr); }
   .hero-media { display: none; }
@@ -278,16 +261,15 @@ dialog.zoom img { display: block; max-width: 100%; max-height: 84vh; width: auto
   .topnav nav { margin-inline: -10px; }
   .topnav nav a { padding: 6px 10px; font-size: 14px; }
   section[id] { scroll-margin-top: 100px; }
-  .comp.wide { grid-template-columns: minmax(0, 1fr); }
-  .comp.wide .comp-body { padding: 0 6px 8px; }
 }
 @media (max-width: 560px) {
-  .comps, .gallery { grid-template-columns: minmax(0, 1fr); }
+  .comps, .gallery, .duo { grid-template-columns: minmax(0, 1fr); }
+  .comp { grid-template-columns: 80px minmax(0, 1fr); gap: 12px; padding: 14px; }
   .vs { grid-template-columns: minmax(0, 1fr); }
 }
 
-/* 포커스 링: 3px 실선, offset 4px. 남색, 파랑 면과 대화창 안에서는 흰색 */
-.band-navy, .track, .topnav, .site-footer, dialog { --focus: #ffffff; }
+/* 포커스 링: 3px 실선, offset 4px. 기본은 #0B5CAB(흰 6.7:1, 연파랑 6.1:1). 01 진한 카드, 푸터, 어두운 바탕 위 확대 창과 영상 창에서는 흰색 */
+.track, .site-footer, dialog.zoom, dialog.player { --focus: #ffffff; }
 :focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
 /* 메뉴는 가로 스크롤 영역이라 링이 잘린다. 안쪽 여백을 두고 같은 만큼 바깥으로 당긴다 */
 .topnav nav { padding: 8px; margin: -8px; }
@@ -296,18 +278,18 @@ dialog.zoom img { display: block; max-width: 100%; max-height: 84vh; width: auto
 .stat-note { flex-basis: 100%; font-size: 14px; color: rgba(255, 255, 255, 0.8); }
 .track.blue .stat-note { color: #ffffff; }
 
-/* Builder Central 자세히 보기 버튼 */
-.more-btn { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px 6px 16px; border-radius: 999px; font-size: 14px; font-weight: 700; line-height: 1.4; background: #ffffff; color: var(--navy-deep); white-space: nowrap; }
+/* Builder Central 자세히 보기 버튼. 02 흰 카드 위라 남색 바탕에 흰 글자(13.4:1) */
+.more-btn { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px 6px 16px; border-radius: 999px; font-size: 14px; font-weight: 700; line-height: 1.4; background: var(--navy); color: #ffffff; white-space: nowrap; }
 .more-btn svg { width: 12px; height: 12px; flex: none; }
 .more-link { all: unset; cursor: pointer; justify-self: start; font-size: 15px; font-weight: 600; color: #ffffff; text-decoration: underline; text-decoration-color: rgba(255, 255, 255, 0.55); text-underline-offset: 4px; border-radius: 4px; }
 
-/* Builder Central 자세히 대화창. 안쪽 패널만 스크롤한다 */
-dialog.bcm { width: min(960px, 94vw); max-width: none; max-height: 88vh; padding: 0; border: 0; border-radius: 24px; background: var(--navy-deep); color: #ffffff; overflow: hidden; box-shadow: 0 24px 64px rgba(0, 12, 32, 0.45); }
+/* Builder Central 자세히 대화창. 흰 패널, 바탕(backdrop)만 어둡게 둔다. 안쪽 패널만 스크롤한다 */
+dialog.bcm { width: min(960px, 94vw); max-width: none; max-height: 88vh; padding: 0; border: 0; border-radius: 24px; background: var(--surface); color: var(--ink); overflow: hidden; box-shadow: 0 24px 64px rgba(0, 12, 32, 0.45); }
 dialog.bcm::backdrop { background: rgba(0, 24, 63, 0.62); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
 .bcm-panel { max-height: 88vh; overflow-y: auto; overscroll-behavior: contain; padding: 0 28px 32px; }
-.bcm-head { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 0 -28px 24px; padding: 18px 28px; background: var(--navy); border-bottom: 1px solid var(--glass-line); }
-.bcm-title { font-size: clamp(22px, 2.6vw, 28px); font-weight: 800; letter-spacing: -0.045em; line-height: 1.25; }
-.bcm-close { flex: none; font: inherit; font-size: 14px; font-weight: 600; color: #ffffff; background: transparent; border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 999px; padding: 4px 16px; cursor: pointer; }
+.bcm-head { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 0 -28px 24px; padding: 18px 28px; background: var(--bg-sky); border-bottom: 1px solid var(--line); }
+.bcm-title { font-size: clamp(22px, 2.6vw, 28px); font-weight: 800; letter-spacing: -0.045em; line-height: 1.25; color: var(--navy-deep); }
+.bcm-close { flex: none; font: inherit; font-size: 14px; font-weight: 600; color: var(--navy); background: #ffffff; border: 1px solid rgba(10, 43, 107, 0.4); border-radius: 999px; padding: 4px 16px; cursor: pointer; }
 html.bcm-lock { overflow: hidden; scrollbar-gutter: stable; }
 @keyframes bcm-in { from { opacity: 0; transform: translateY(24px) scale(0.97); } }
 @keyframes bcm-out { to { opacity: 0; transform: translateY(16px) scale(0.98); } }
@@ -323,8 +305,8 @@ dialog.bcm.is-closing::backdrop { animation: bcm-fade-out 0.22s ease forwards; }
 /* 등장. 숨김 클래스(rv, seq)는 JS가 붙이므로 JS가 꺼져 있으면 모두 보인다 */
 .rv { opacity: 0; translate: 0 18px; transition: opacity 0.65s ease, translate 0.65s ease; }
 .rv.is-in { opacity: 1; translate: 0 0; }
-/* 01 카드 묶음은 첫 화면 아래 끝에 걸친다. 등장 판정(8%)이 늦지 않도록 아래로 밀지 않고 투명도만 바꾼다 */
-#changes .tracks.rv { translate: 0 0; }
+/* 01 카드는 첫 화면 아래 끝에 걸친다. 띠가 늘어 묶음 전체의 8%가 첫 화면 노출분보다 커졌으므로 카드 한 장씩 판정한다. 아래로 밀지 않고 투명도만 바꾼다 */
+#changes .track.rv { translate: 0 0; }
 .seq { opacity: 0; translate: 0 28px; transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), translate 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.25s ease, box-shadow 0.25s ease; }
 .seq.is-in { opacity: 1; translate: 0 0; }
 @keyframes hero-rise { from { opacity: 0; translate: 0 24px; } }
@@ -335,10 +317,9 @@ figure > button, .vbtn, .more-btn, .more-link, .copy-btn { transition: transform
 @media (hover: hover) {
   .copy-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 18px rgba(0, 24, 63, 0.16); }
   figure > button:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0, 24, 63, 0.18); }
-  .band-navy figure > button:hover, .track figure > button:hover { box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35); }
+  .track figure > button:hover { box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35); }
   .vbtn:hover { transform: translateY(-3px); box-shadow: inset 0 0 0 1px var(--accent), 0 8px 18px rgba(0, 24, 63, 0.16); }
-  .band-navy .vbtn:hover { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6), 0 10px 22px rgba(0, 0, 0, 0.32); }
-  .more-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 22px rgba(0, 0, 0, 0.32); }
+  .more-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 22px rgba(0, 24, 63, 0.24); }
   .more-link:hover { transform: translateY(-3px); text-decoration-color: #ffffff; }
 }
 
@@ -352,6 +333,7 @@ figure > button, .vbtn, .more-btn, .more-link, .copy-btn { transition: transform
 @media (prefers-reduced-motion: reduce) {
   .rv, .seq { opacity: 1 !important; translate: 0 0 !important; transition: none !important; }
   .js .hero-text { animation: none; }
+  .topnav { transition: none; }
   dialog.bcm[open], dialog.bcm[open]::backdrop, dialog.bcm.is-closing, dialog.bcm.is-closing::backdrop { animation: none; }
   figure > button, .vbtn, .more-btn, .more-link, .copy-btn { transition: none; }
   figure > button:hover, .vbtn:hover, .more-btn:hover, .more-link:hover, .copy-btn:hover { transform: none; }
@@ -385,16 +367,12 @@ dialog.bcm#bc-modal .bcm-close, [data-open="bc-modal"] { display: none !importan
 
 <main id="top">
 
-  <section class="band-navy" aria-labelledby="hero-title">
+  <section class="band-hero" aria-labelledby="hero-title">
     <div class="inner hero hero-grid">
       <div class="hero-text">
         <h1 id="hero-title">Salesforce org와<br>대화로 일하다</h1>
         <p class="lede">Seoul Dreamin'&nbsp;2026에서 듣고, 개인 org와 평가판 org에서 직접 해 봤습니다.</p>
         <p class="when">2026-11-11, 서울 COEX</p>
-        <div class="verdict">
-          <span class="pill ok"><span class="dot" aria-hidden="true"></span>통과 <b>8</b></span>
-          <span class="pill no"><span class="dot" aria-hidden="true"></span>안 됨 <b>1</b></span>
-        </div>
       </div>
       <!-- Seoul Dreamin' 이미지 자리: 법무 확인과 사용자 답을 받은 뒤 채운다. 공식 사이트 로고와 이미지는 쓰지 않는다 -->
       <div class="hero-media" aria-hidden="true"></div>
@@ -412,7 +390,7 @@ dialog.bcm#bc-modal .bcm-close, [data-open="bc-modal"] { display: none !importan
           <div class="track-top">
             <span class="track-env">개인 Developer Edition org</span>
             <h3>Headless&nbsp;360</h3>
-            <p class="track-lede">CLI로 손대지 못하던 Setup 영역을 대화로 읽고, Data&nbsp;360 구축도 대화로 진행합니다.</p>
+            <p class="track-lede">CLI로 손대지 못하던 Setup 영역을 대화로 읽고, Data&nbsp;360 구성과 필드 만들기도 대화로 진행합니다.</p>
           </div>
           <div class="flow">
             <h4 class="flow-title">Release Update 기한 점검</h4>
@@ -461,16 +439,89 @@ dialog.bcm#bc-modal .bcm-close, [data-open="bc-modal"] { display: none !importan
               </div>
             </div>
           </div>
+          <div class="flow">
+            <h4 class="flow-title">필드 만들기</h4>
+            <div class="flow-row note">
+              <div class="flow-before">
+                <span class="flow-tag">기존 방식</span>
+                <div class="before-box">
+                  <p>Setup의 Object Manager에서 필드 만들기 마법사를 단계마다 넘깁니다.</p>
+                </div>
+              </div>
+              <span class="flow-arrow" aria-hidden="true">→</span>
+              <div class="flow-after">
+                <span class="flow-tag">이제</span>
+                <div class="prompt cc">
+                  <span class="prompt-label">Claude Code에 입력한 문장</span>
+                  <p>“Headless 360 MCP로 Account에 커스텀 필드를 하나 만들어줘. API명 H360DemoNote__c, 레이블 H360 시연 메모, Text 50자, 설명 ‘Headless 360 MCP 쓰기 시연용 필드. 시연 후 삭제한다.’, 도움말 ‘시연용 필드입니다. 값을 넣지 마세요.’ 만들기 전에 이미 있는지 확인하고, 보낼 요청을 먼저 보여준 뒤 내 확인을 받아. 만든 뒤에는 다시 읽어서 결과를 확인해줘. FLS, 페이지 레이아웃, 권한 세트, 데이터는 건드리지 마.”</p>
+                </div>
+                <figure class="flow-result">
+                  <button type="button" class="crop" data-full="shots/apply-after-s5.png" aria-label="필드 생성 결과 화면 크게 보기" style="--cx:0;--cy:326;--cw:680;--ch:146;--sw:1440"><img src="shots/apply-after-s5.png" alt="Claude Code 답변. 다시 읽은 필드 값 표: H360DemoNote__c, H360 시연 메모, Text 50" width="1440" height="900" loading="lazy"></button>
+                  <figcaption class="stats">
+                    <span class="stat"><b>1개</b><span>Account Text 필드</span></span>
+                    <span class="stat"><b>1회</b><span>쓰기 요청</span></span>
+                    <span class="stat-note">만든 뒤 다시 읽어 요청한 값과 같은지 확인했습니다. 삭제는 Beta에서 안 됩니다.</span>
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
           <div class="tags"><span class="tag">Headless&nbsp;360 MCP</span><span class="tag">Data&nbsp;360 MCP</span><span class="tag">Claude Code</span></div>
         </article>
         <article class="track deep">
           <div class="track-top">
-            <span class="track-env">Enterprise 평가판 org</span>
-            <h3>Builder Central</h3>
-            <p class="track-lede">자연어 요청으로 만든 화면을 org에 게시합니다.</p>
-            <button type="button" class="more-link" data-open="bc-modal" aria-haspopup="dialog">실습 과정 자세히 보기</button>
+            <h3>화면 만들기</h3>
+            <p class="track-lede">LWC를 개발해 배포하는 대신 JSON 카드, 내 PC의 React 앱, Builder Central 자연어 요청으로 화면을 만들었습니다.</p>
           </div>
           <div class="flow">
+            <h4 class="flow-title">고객 시연용 화면</h4>
+            <p class="flow-env">HXL Playground, 개인 Developer Edition org</p>
+            <div class="flow-row duo-row">
+              <figure class="flow-before">
+                <span class="flow-tag">기존 방식</span>
+                <button type="button" class="crop" data-full="img/before-s4-lwc.jpg" aria-label="기존 LWC 개발 흐름 크게 보기" style="--cx:60;--cy:50;--cw:1320;--ch:560;--sw:1440"><img src="img/before-s4-lwc.jpg" alt="기존 LWC 개발 흐름 설명 카드. 컴포넌트 생성, 코드 작성, 배포, App Builder 배치 4단계" width="1440" height="900" loading="lazy"></button>
+                <figcaption>App Builder까지 화면&nbsp;9개, 클릭&nbsp;9번<span class="cap-note">LWC 코드 작성과 배포는 이 수에 넣지 않았습니다.</span></figcaption>
+              </figure>
+              <span class="flow-arrow" aria-hidden="true">→</span>
+              <div class="flow-after">
+                <span class="flow-tag">이제</span>
+                <div class="duo">
+                  <div class="duo-item">
+                    <h5 class="duo-name">HXL 카드</h5>
+                    <div class="prompt desc">
+                      <span class="prompt-label">한 일</span>
+                      <p>JSON 하나로 카드를 정의했습니다.</p>
+                    </div>
+                    <figure class="flow-result">
+                      <button type="button" class="crop" data-full="shots/t5-widget-preview.png" aria-label="HXL 카드 미리보기 크게 보기" style="--cx:240;--cy:178;--cw:716;--ch:430;--sw:1440"><img src="shots/t5-widget-preview.png" alt="HXL Playground에서 JSON으로 만든 카드 미리보기. Agentforce, Slackbot, ChatGPT, Claude 탭" width="1440" height="900" loading="lazy"></button>
+                      <figcaption class="stats">
+                        <span class="stat"><b>4개</b><span>채널에서 미리보기</span></span>
+                        <span class="stat-note">로그인 없이 봤습니다.</span>
+                      </figcaption>
+                    </figure>
+                  </div>
+                  <div class="duo-item">
+                    <h5 class="duo-name">React 앱</h5>
+                    <div class="prompt desc">
+                      <span class="prompt-label">한 일</span>
+                      <p>React 템플릿 앱을 내 PC에서 실행했습니다.</p>
+                    </div>
+                    <figure class="flow-result">
+                      <button type="button" class="crop" data-full="shots/t6-app-data.png" aria-label="React 앱 화면 크게 보기" style="--cx:110;--cy:90;--cw:1190;--ch:714;--sw:1440"><img src="shots/t6-app-data.png" alt="내 PC의 React 앱에 org의 Account 16건이 표시된 화면" width="1440" height="900" loading="lazy"></button>
+                      <figcaption class="stats">
+                        <span class="stat"><b>16건</b><span>Account를 GraphQL로 표시</span></span>
+                        <span class="stat-note">org에 배포하지 않았습니다.</span>
+                      </figcaption>
+                    </figure>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flow">
+            <h4 class="flow-title">Builder Central</h4>
+            <p class="flow-env">Enterprise 평가판 org</p>
+            <button type="button" class="more-link" data-open="bc-modal" aria-haspopup="dialog">실습 과정 자세히 보기</button>
             <div class="flow-row bc">
               <div class="flow-after">
                 <span class="flow-tag">요청</span>
@@ -491,13 +542,13 @@ dialog.bcm#bc-modal .bcm-close, [data-open="bc-modal"] { display: none !importan
               </figure>
             </div>
           </div>
-          <div class="tags"><span class="tag">Builder Central</span><span class="tag">UI Bundle</span><span class="tag">React</span></div>
+          <div class="tags"><span class="tag">HXL</span><span class="tag">Multi-Framework</span><span class="tag">Builder Central</span><span class="tag">UI Bundle</span><span class="tag">React</span></div>
         </article>
       </div>
     </div>
   </section>
 
-  <section id="tried" class="band band-navy" aria-labelledby="s2-title">
+  <section id="tried" class="band band-sky" aria-labelledby="s2-title">
     <div class="inner">
       <div class="sec-head">
         <span class="num">02</span>
@@ -507,69 +558,81 @@ dialog.bcm#bc-modal .bcm-close, [data-open="bc-modal"] { display: none !importan
       <div class="comps">
         <div class="comp">
           <figure><button type="button" data-full="shots/t1-plugin-install.png" aria-label="plugin 설치 화면 크게 보기"><img src="shots/t1-plugin-install.png" alt="Salesforce Development plugin 설치 확인 화면" width="1440" height="900" loading="lazy"></button></figure>
-          <div class="status"><span class="state ok">테스트&nbsp;1 통과</span><span class="state no">추가 확인 안 됨</span></div>
-          <h3>Agentforce Labs</h3>
-          <p>Salesforce Development plugin입니다. Claude Code에 Salesforce 개발 skill&nbsp;38개를 붙입니다. plugin에 들어 있는 Headless&nbsp;360 연결은 Beta 접근 검사에 막혀 도구가&nbsp;0개였습니다.</p>
-          <div class="links">
-            <button class="vbtn" type="button" data-video="clips/t1.mp4" data-title="테스트 1 plugin 설치, 15초"><svg viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg>영상&nbsp;15초</button>
-            <button class="vbtn" type="button" data-video="clips/tB-plugin-ui.mp4" data-title="plugin 내장 연결 시도, 1분 18초"><svg viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg>내장 연결&nbsp;1분&nbsp;18초</button>
-            <a href="https://developer.salesforce.com/docs/platform/salesforce-skills-plugins/guide/install-salesforce-development.html" target="_blank" rel="noopener">공식 문서</a>
+          <div class="comp-body">
+            <div class="status"><span class="state ok">테스트&nbsp;1 통과</span><span class="state no">추가 확인 안 됨</span></div>
+            <h3>Agentforce Labs</h3>
+            <p>Claude Code에 skill&nbsp;38개를 붙이는 plugin이고, 내장 Headless&nbsp;360 연결은 Beta 접근 검사에 막혀 도구가&nbsp;0개였습니다.</p>
+            <div class="links">
+              <button class="vbtn" type="button" data-video="clips/t1.mp4" data-title="테스트 1 plugin 설치, 15초"><svg viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg>영상&nbsp;15초</button>
+              <button class="vbtn" type="button" data-video="clips/tB-plugin-ui.mp4" data-title="plugin 내장 연결 시도, 1분 18초"><svg viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg>내장 연결&nbsp;1분&nbsp;18초</button>
+              <a href="https://developer.salesforce.com/docs/platform/salesforce-skills-plugins/guide/install-salesforce-development.html" target="_blank" rel="noopener">공식 문서</a>
+            </div>
           </div>
         </div>
         <div class="comp">
           <figure><button type="button" data-full="shots/t2-mcp-servers-active.png" aria-label="MCP Servers 화면 크게 보기"><img src="shots/t2-mcp-servers-active.png" alt="Setup MCP Servers 화면에서 서버 3개가 Active인 모습" width="1440" height="900" loading="lazy"></button></figure>
-          <div class="status"><span class="state ok">테스트&nbsp;2 통과</span><span class="state ok">테스트&nbsp;3 통과(읽기)</span></div>
-          <h3>Try Headless&nbsp;360</h3>
-          <p>Salesforce가 운영하는 MCP 서버&nbsp;3개를 켜고 Claude Code에 연결했습니다. Setup 화면 정보를 대화로 읽습니다. 쓰기 승인 창은 운영 방식에 맞춰 껐습니다.</p>
-          <div class="links">
-            <button class="vbtn" type="button" data-video="clips/t2-3.mp4" data-title="테스트 2, 3 연결과 조회, 1분 27초"><svg viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg>영상&nbsp;1분&nbsp;27초</button>
-            <a href="https://developer.salesforce.com/workshops/try-headless-360/overview" target="_blank" rel="noopener">workshop</a>
-            <a href="https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/headless-360-mcp.html" target="_blank" rel="noopener">MCP 문서</a>
+          <div class="comp-body">
+            <div class="status"><span class="state ok">테스트&nbsp;2 통과</span><span class="state ok">테스트&nbsp;3 통과(읽기)</span></div>
+            <h3>Try Headless&nbsp;360</h3>
+            <p>Salesforce가 운영하는 MCP 서버&nbsp;3개를 켜고 Claude Code에 연결해 Setup 정보를 대화로 읽었습니다.</p>
+            <div class="links">
+              <button class="vbtn" type="button" data-video="clips/t2-3.mp4" data-title="테스트 2, 3 연결과 조회, 1분 27초"><svg viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg>영상&nbsp;1분&nbsp;27초</button>
+              <a href="https://developer.salesforce.com/workshops/try-headless-360/overview" target="_blank" rel="noopener">workshop</a>
+              <a href="https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/headless-360-mcp.html" target="_blank" rel="noopener">MCP 문서</a>
+            </div>
           </div>
         </div>
         <div class="comp">
           <figure><button type="button" data-full="shots/t4-data-graph.png" aria-label="Data Graph 화면 크게 보기"><img src="shots/t4-data-graph.png" alt="생성된 Data Graph 화면" width="1440" height="900" loading="lazy"></button></figure>
-          <div class="status"><span class="state ok">테스트&nbsp;4 통과</span></div>
-          <h3>Data&nbsp;360 Headless</h3>
-          <p>Data&nbsp;360 MCP와 recipe라는 절차서를 씁니다. 데이터 스트림 적재부터 Data Graph 생성까지 대화로 진행했습니다. 스트림 활성화는 되돌릴 수 없습니다.</p>
-          <div class="links">
-            <button class="vbtn" type="button" data-video="clips/t4.mp4" data-title="테스트 4 Data 360 구성, 39초"><svg viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg>영상&nbsp;39초</button>
-            <a href="https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/data360-mcp.html" target="_blank" rel="noopener">공식 문서</a>
-            <a href="https://www.salesforce.com/blog/data-360-headless-extend-the-power-of-data-360-to-any-agent-app-or-dev-tool" target="_blank" rel="noopener">소개 글</a>
+          <div class="comp-body">
+            <div class="status"><span class="state ok">테스트&nbsp;4 통과</span></div>
+            <h3>Data&nbsp;360 Headless</h3>
+            <p>Data&nbsp;360 MCP의 recipe로 데이터 스트림 적재부터 Data Graph 생성까지 대화로 진행했습니다.</p>
+            <div class="links">
+              <button class="vbtn" type="button" data-video="clips/t4.mp4" data-title="테스트 4 Data 360 구성, 39초"><svg viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg>영상&nbsp;39초</button>
+              <a href="https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/data360-mcp.html" target="_blank" rel="noopener">공식 문서</a>
+              <a href="https://www.salesforce.com/blog/data-360-headless-extend-the-power-of-data-360-to-any-agent-app-or-dev-tool" target="_blank" rel="noopener">소개 글</a>
+            </div>
           </div>
         </div>
         <div class="comp">
           <figure><button type="button" data-full="shots/t5-widget-preview.png" aria-label="HXL 미리보기 크게 보기"><img src="shots/t5-widget-preview.png" alt="HXL Playground 위젯 미리보기" width="1440" height="900" loading="lazy"></button></figure>
-          <div class="status"><span class="state ok">테스트&nbsp;5 통과</span></div>
-          <h3>HXL</h3>
-          <p>카드형 화면을 JSON으로 만들어 Agentforce, Slack, ChatGPT, Claude 4개&nbsp;채널에서 미리 봅니다. 로그인이 필요 없습니다.</p>
-          <div class="links">
-            <button class="vbtn" type="button" data-video="clips/t5.mp4" data-title="테스트 5 HXL Playground, 1분 21초"><svg viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg>영상&nbsp;1분&nbsp;21초</button>
-            <a href="https://headlessexperiencelayer.com" target="_blank" rel="noopener">HXL Playground</a>
+          <div class="comp-body">
+            <div class="status"><span class="state ok">테스트&nbsp;5 통과</span></div>
+            <h3>HXL</h3>
+            <p>JSON 하나로 만든 카드를 로그인 없이 4개&nbsp;채널에서 미리 봤습니다.</p>
+            <div class="links">
+              <button class="vbtn" type="button" data-video="clips/t5.mp4" data-title="테스트 5 HXL Playground, 1분 21초"><svg viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg>영상&nbsp;1분&nbsp;21초</button>
+              <a href="https://headlessexperiencelayer.com" target="_blank" rel="noopener">HXL Playground</a>
+            </div>
           </div>
         </div>
         <div class="comp">
           <figure><button type="button" data-full="shots/t6-app-data.png" aria-label="React 앱 화면 크게 보기"><img src="shots/t6-app-data.png" alt="로컬 React 앱에 org 데이터가 표시된 화면" width="1440" height="900" loading="lazy"></button></figure>
-          <div class="status"><span class="state ok">테스트&nbsp;6 통과</span></div>
-          <h3>Multi-Framework</h3>
-          <p>React 앱을 Salesforce Platform에서 돌립니다. 배포하지 않고 내 PC에서 org의 Account&nbsp;16건을 GraphQL로 표시했습니다.</p>
-          <div class="links">
-            <button class="vbtn" type="button" data-video="clips/t6.mp4" data-title="테스트 6 React 앱, 45초"><svg viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg>영상&nbsp;45초</button>
-            <a href="https://developer.salesforce.com/docs/platform/multiframework/overview" target="_blank" rel="noopener">공식 문서</a>
+          <div class="comp-body">
+            <div class="status"><span class="state ok">테스트&nbsp;6 통과</span></div>
+            <h3>Multi-Framework</h3>
+            <p>React 앱을 배포하지 않고 내 PC에서 org 데이터로 띄웠습니다.</p>
+            <div class="links">
+              <button class="vbtn" type="button" data-video="clips/t6.mp4" data-title="테스트 6 React 앱, 45초"><svg viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg>영상&nbsp;45초</button>
+              <a href="https://developer.salesforce.com/docs/platform/multiframework/overview" target="_blank" rel="noopener">공식 문서</a>
+            </div>
           </div>
         </div>
         <div class="comp">
           <figure><button type="button" data-full="shots/apply-after-s5.png" aria-label="필드 생성 화면 크게 보기"><img src="shots/apply-after-s5.png" alt="Headless 360으로 Account 필드를 만든 뒤 다시 읽은 결과" width="1440" height="900" loading="lazy"></button></figure>
-          <div class="status"><span class="state ok">추가 확인 통과</span></div>
-          <h3>Headless&nbsp;360으로 쓰기</h3>
-          <p>대화 한 번으로 Account에 Text 필드&nbsp;1개를 만들고 다시 읽어 확인했습니다. 삭제는 Beta에서 안 됩니다. Setup이나 CLI로 지워야 합니다.</p>
+          <div class="comp-body">
+            <div class="status"><span class="state ok">추가 확인 통과</span></div>
+            <h3>Headless&nbsp;360으로 쓰기</h3>
+            <p>대화 한 번으로 Account에 Text 필드&nbsp;1개를 만들고 다시 읽어 확인했습니다.</p>
+          </div>
         </div>
         <div class="comp wide">
-          <figure class="bc"><button type="button" data-full="bc/img/bc-home.jpg" aria-label="Builder Central 시작 화면 크게 보기"><img src="bc/img/bc-home.jpg" alt="Builder Central 시작 화면. 입력창과 빠른 작업 카드" width="1600" height="724" loading="lazy"></button></figure>
+          <figure><button type="button" data-full="bc/img/bc-home.jpg" aria-label="Builder Central 시작 화면 크게 보기"><img src="bc/img/bc-home.jpg" alt="Builder Central 시작 화면. 입력창과 빠른 작업 카드" width="1600" height="724" loading="lazy"></button></figure>
           <div class="comp-body">
             <div class="status"><span class="state ok">실습 통과</span></div>
             <h3>Builder Central</h3>
-            <p>자연어 요청으로 앱과 에이전트를 만들어 org에 게시하는 Salesforce 작업공간입니다. 지금은 베타입니다. 켜고, 화면 하나를 만들어 게시하고, 결과까지 확인했습니다.</p>
+            <p>베타인 Builder Central을 켜고, 자연어 요청으로 화면 하나를 만들어 org에 게시했습니다.</p>
             <div class="links">
               <button type="button" class="more-btn" data-open="bc-modal" aria-haspopup="dialog">자세히 보기<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
               <button class="vbtn" type="button" data-video="bc/video/builder-central.mp4" data-title="Builder Central 빌드와 게시, 55초"><svg viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg>영상&nbsp;55초</button>
@@ -613,7 +676,7 @@ dialog.bcm#bc-modal .bcm-close, [data-open="bc-modal"] { display: none !importan
         <div class="cmp-card">
           <h3>고객 시연용 화면</h3>
           <div class="vs">
-            <div class="side before"><span class="who">기존 방식</span><span class="big">화면&nbsp;9개</span><span class="sub">LWC 개발과 배포</span><button class="vbtn" type="button" data-video="apply/clips/before-s4.mp4" data-title="04 기존 방식, 39초"><svg viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg>영상&nbsp;39초</button></div>
+            <div class="side before"><span class="who">기존 방식</span><span class="big">화면&nbsp;9개</span><span class="sub">App Builder까지, LWC 코드 작성과 배포는 빼고 셈</span><button class="vbtn" type="button" data-video="apply/clips/before-s4.mp4" data-title="04 기존 방식, 39초"><svg viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg>영상&nbsp;39초</button></div>
             <div class="side after"><span class="who">Claude Code</span><span class="big words">JSON 시안</span><span class="sub">로컬 React 앱</span><button class="vbtn" type="button" data-video="apply/clips/after-s4.mp4" data-title="04 Claude Code, 43초"><svg viewBox="0 0 12 12"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg>영상&nbsp;43초</button></div>
           </div>
         </div>
@@ -734,7 +797,7 @@ dialog.bcm#bc-modal .bcm-close, [data-open="bc-modal"] { display: none !importan
   <div class="pl-bar"><span id="pl-title"></span><button type="button" id="pl-close">닫기</button></div>
 </dialog>
 <dialog class="bcm" id="bc-modal" aria-labelledby="bc-detail-title">
-  <div class="bcm-panel band-navy">
+  <div class="bcm-panel">
     <div class="bcm-head">
       <h2 class="bcm-title" id="bc-detail-title">Builder Central 자세히</h2>
       <button type="button" class="bcm-close" autofocus>닫기</button>
@@ -888,7 +951,7 @@ dialog.bcm#bc-modal .bcm-close, [data-open="bc-modal"] { display: none !importan
   if (still() || !('IntersectionObserver' in window)) return;
 
   // 섹션 머리와 본문 블록: 한 번만 나타난다. 빠르게 건너뛴 위쪽 블록도 함께 보이게 한다
-  var blocks = Array.prototype.slice.call(document.querySelectorAll('main .sec-head, .tracks, .comps, .cmp, .setup, .risks'));
+  var blocks = Array.prototype.slice.call(document.querySelectorAll('main .sec-head, #changes .track, .comps, .cmp, .setup, .risks'));
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       if (!e.isIntersecting) return;
@@ -917,11 +980,25 @@ dialog.bcm#bc-modal .bcm-close, [data-open="bc-modal"] { display: none !importan
     if (!busy) pump();
   }, { threshold: 0.35, rootMargin: '0px 0px -8% 0px' });
   document.querySelectorAll('#changes .flow-row').forEach(function (row, r) {
-    var list = ['.prompt', '.stats', '.flow-result > button']
-      .map(function (s) { return row.querySelector(s); })
-      .filter(Boolean);
+    // 한 띠에 칸이 둘(HXL, React)일 수 있어 선택자마다 모두 모은다. 말풍선들, 숫자들, 결과 그림들 순서
+    var list = [];
+    ['.prompt', '.stats', '.flow-result > button'].forEach(function (s) {
+      Array.prototype.push.apply(list, row.querySelectorAll(s));
+    });
     list.forEach(function (el, i) { el.seqList = list; el.seqRow = r; el.seqIndex = i; el.classList.add('seq'); seqIO.observe(el); });
   });
+})();
+</script>
+<script>
+// 상단 메뉴: 스크롤하면 흰 바탕과 얇은 경계선(html.is-scrolled)
+(function () {
+  var root = document.documentElement, on = false;
+  function check() {
+    var s = (window.scrollY || window.pageYOffset) > 4;
+    if (s !== on) { on = s; root.classList.toggle('is-scrolled', s); }
+  }
+  window.addEventListener('scroll', check, { passive: true });
+  check();
 })();
 </script>
 <script>
