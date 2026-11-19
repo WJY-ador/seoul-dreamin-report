@@ -338,6 +338,54 @@ figure > button, .vbtn, .more-btn, .more-link, .copy-btn { transition: transform
   figure > button, .vbtn, .more-btn, .more-link, .copy-btn { transition: none; }
   figure > button:hover, .vbtn:hover, .more-btn:hover, .more-link:hover, .copy-btn:hover { transform: none; }
 }
+/* 첫 화면 그림: 층 나뉜 3D 일러스트(AI 생성). 배경(보도) 위에 인물, 말풍선, 데이터 카드를 따로 얹는다.
+   배경은 첫 화면 전체를 덮고(cover), 인물 묶음은 첫 화면 높이에 맞춰 오른쪽 아래에 둔다. 묶음 안 세 층의 자리는 합성 미리보기 비율 그대로다.
+   720px 이상은 글을 그림 위 왼쪽 위 하늘 쪽에 얹는다. 720px 미만(휴대폰)만 그림을 글 위 띠로 올리고 글을 그 아래에 둔다.
+   높이: 1280x800에서 01 제목이 첫 화면 안에 들어오는 값(41vw, 1280에서 525px). 글은 남색이다.
+   배경이 cover라 화면 폭마다 글 뒤 그림이 바뀐다(1024는 은행나무 줄기, 1920은 건물). 글 묶음 왼쪽 끝을 따라가는 옅은 흰 그라데이션을 덧대 문장 최소 대비를 4.5:1 위로 둔다.
+   움직임: 말풍선 5.5초, 카드 6.5초 주기로 10px 둥실(translate). 마우스 패럴랙스는 스크립트가 층마다 transform을 바꾼다(배경 2px, 인물 6px, 소품 10~11px).
+   CSS animation은 translate만, 스크립트는 transform만 써서 둘이 겹쳐도 서로 지우지 않는다 */
+.hero4 { --hero-h: clamp(460px, 41vw, 560px); position: relative; overflow: hidden; isolation: isolate; background: linear-gradient(180deg, #afbcaa 0%, #d8b892 100%); }
+.h4-scene { position: absolute; inset: 0; z-index: -1; }
+.h4-layer { position: absolute; }
+.h4-layer img { display: block; width: 100%; height: 100%; max-width: none; }
+/* 패럴랙스 2px에 가장자리가 드러나지 않게 6px 넘쳐 둔다 */
+.h4-bg { inset: -6px; }
+.h4-bg img { object-fit: cover; object-position: 50% 60%; }
+/* 옅은 흰 막: 글 묶음 왼쪽 끝(--tx, .inner와 같은 계산)부터 300px까지 0.42, 640px에서 0 */
+.h4-veil { --tx: max(20px, 50vw - 600px); position: absolute; inset: 0; background: linear-gradient(90deg, rgba(255, 255, 255, 0.42) 0, rgba(255, 255, 255, 0.42) calc(var(--tx) + 300px), rgba(255, 255, 255, 0) calc(var(--tx) + 640px)); }
+.h4-group { position: absolute; right: 4.43%; bottom: 1.2%; height: 94%; aspect-ratio: 588.0 / 830.0; }
+.h4-person { left: 23.89%; top: 15.65%; width: 48.50%; height: 84.35%; }
+.h4-bubble { left: 0.00%; top: 0.00%; width: 33.06%; height: 20.52%; }
+.h4-card { left: 74.79%; top: 13.83%; width: 25.21%; height: 14.51%; }
+.h4-bubble img { animation: h4-float 5.5s ease-in-out infinite; }
+.h4-card img { animation: h4-float 6.5s ease-in-out -3.1s infinite; }
+@keyframes h4-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -10px; } }
+.js .h4-person img { animation: hero-rise 0.8s ease 0.1s both; }
+.h4-text { min-height: var(--hero-h); padding-block: clamp(40px, 4.4vw, 60px) 40px; }
+/* 글 폭은 은행나무 줄기 앞에서 멈춘다. 문장은 듣고, 뒤의 br(.br-wide)에서 끊어 두 줄로 둔다. 한 줄로 펴지면 1024에서 줄기 위로 가 대비가 2.2:1까지 떨어진다 */
+.hero4 .hero-text { max-width: 540px; }
+.hero4 .lede { max-width: 21em; text-wrap: balance; }
+.hero4 .when { color: var(--navy); }
+@media (min-width: 720px) and (max-width: 960px) {
+  /* 중간 폭: 글은 그림 위에 둔 채 인물 묶음만 폭에 맞춰 줄인다. 720에서 368px, 960에서 431px로 961 이상의 94%(432px)에 이어진다.
+     720에서 h1 첫 줄 끝과 말풍선 사이를 40px 남긴다. 패럴랙스(소품 10~11px)와 방문자 글꼴 차이를 받는 여유다 */
+  .h4-group { height: min(94%, calc(176px + 26.6vw)); }
+}
+@media (max-width: 719.98px) {
+  /* 휴대폰: 그림을 글 위 띠로 올리고, 인물 묶음을 작게 오른쪽 아래에 둔다. 글은 그림 아래 연파랑 바탕에 두어 겹치지 않는다. 문장은 자연 줄바꿈 */
+  .br-wide { display: none; }
+  .hero4 { display: flex; flex-direction: column; background: var(--bg-sky); }
+  .h4-scene { position: relative; inset: auto; z-index: 0; order: -1; height: clamp(230px, 50vw, 420px); overflow: hidden; background: linear-gradient(180deg, #afbcaa 0%, #d8b892 100%); }
+  .h4-veil { display: none; }
+  .h4-bg img { object-position: 64% 72%; }
+  .h4-group { right: 3%; bottom: 3%; height: 86%; }
+  .h4-text { min-height: 0; padding-block: 28px 32px; width: 100%; }
+  .hero4 .hero-text { max-width: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .h4-bubble img, .h4-card img, .js .h4-person img { animation: none; }
+}
 </style>
 <script>document.documentElement.classList.add('js');</script>
 <noscript><style>
@@ -367,15 +415,24 @@ dialog.bcm#bc-modal .bcm-close, [data-open="bc-modal"] { display: none !importan
 
 <main id="top">
 
-  <section class="band-hero" aria-labelledby="hero-title">
-    <div class="inner hero hero-grid">
+  <section class="band-hero hero4" aria-labelledby="hero-title">
+    <!-- 첫 화면 그림(AI 생성). 층 4개: 배경, 인물, 말풍선, 데이터 카드. 넓은 화면은 배경 위 오른쪽 아래에 인물 묶음을 얹고,
+         720px 미만은 그림을 글 위 띠로 올린다. 움직임은 아래 스크립트와 .hero4 CSS -->
+    <div class="h4-scene" role="img" aria-label="은행나무 가로수 보도를 노트북을 끼고 걷는 직장인과, 그 옆에 떠 있는 말풍선과 막대그래프 카드를 그린 3D 일러스트">
+      <div class="h4-layer h4-bg" data-depth="2"><img src="hero/bg-1672.webp" srcset="hero/bg-960.webp 960w, hero/bg-1672.webp 1672w" sizes="100vw" width="1672" height="941" alt="" decoding="async" fetchpriority="high"></div>
+      <div class="h4-veil"></div>
+      <div class="h4-group">
+        <div class="h4-layer h4-person" data-depth="6"><img src="hero/person.webp" width="407" height="1000" alt="" decoding="async"></div>
+        <div class="h4-layer h4-bubble" data-depth="10"><img src="hero/bubble.webp" width="297" height="260" alt="" decoding="async"></div>
+        <div class="h4-layer h4-card" data-depth="11"><img src="hero/card.webp" width="246" height="200" alt="" decoding="async"></div>
+      </div>
+    </div>
+    <div class="inner hero h4-text">
       <div class="hero-text">
         <h1 id="hero-title">Salesforce org와<br>대화로 일하다</h1>
-        <p class="lede">Seoul Dreamin'&nbsp;2026에서 듣고, 개인 org와 평가판 org에서 직접 해 봤습니다.</p>
+        <p class="lede">Seoul Dreamin'&nbsp;2026에서 듣고,<br class="br-wide"> 개인 org와 평가판 org에서 직접 해 봤습니다.</p>
         <p class="when">2026-11-11, 서울 COEX</p>
       </div>
-      <!-- Seoul Dreamin' 이미지 자리: 법무 확인과 사용자 답을 받은 뒤 채운다. 공식 사이트 로고와 이미지는 쓰지 않는다 -->
-      <div class="hero-media" aria-hidden="true"></div>
     </div>
   </section>
 
@@ -782,6 +839,7 @@ dialog.bcm#bc-modal .bcm-close, [data-open="bc-modal"] { display: none !importan
         <li><a href="https://developer.salesforce.com/docs/platform/multiframework/overview" target="_blank" rel="noopener">Multi-Framework 개요</a></li>
         <li><a href="https://www.salesforce.com/headless/builder/" target="_blank" rel="noopener">Salesforce Builder Central 공개 페이지</a></li>
       </ul>
+      <p>첫 화면 그림은 AI로 만든 이미지입니다.</p>
     </div>
     <div class="foot-col">
       <h4>행사</h4>
@@ -1023,6 +1081,47 @@ dialog.bcm#bc-modal .bcm-close, [data-open="bc-modal"] { display: none !importan
       navigator.clipboard.writeText(src.textContent.trim()).then(function () { show('복사됨'); }, select);
     });
   });
+})();
+</script>
+<script>
+// 첫 화면 패럴랙스: 마우스 반대 방향으로 층마다 data-depth px만큼 움직인다. requestAnimationFrame으로 따라가고, 멈추면 루프를 끝낸다.
+// 움직임 줄이기 설정이나 hover가 없는 기기(터치)에서는 끈다. 첫 화면이 화면 밖이면 계산하지 않는다
+(function () {
+  var hero = document.querySelector('.hero4');
+  if (!hero || !window.matchMedia) return;
+  var layers = Array.prototype.slice.call(hero.querySelectorAll('[data-depth]'));
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var fine = window.matchMedia('(hover: hover) and (pointer: fine)');
+  var tx = 0, ty = 0, cx = 0, cy = 0, raf = 0, last = 0, seen = true;
+  function on() { return fine.matches && !still.matches; }
+  function paint() {
+    layers.forEach(function (el) {
+      var d = +el.getAttribute('data-depth');
+      el.style.transform = (cx || cy) ? 'translate3d(' + (-cx * d).toFixed(2) + 'px, ' + (-cy * d).toFixed(2) + 'px, 0)' : '';
+    });
+  }
+  // 보간은 경과 시간 기준(시정수 140ms)이라 60Hz와 120Hz 화면에서 같은 속도로 따라간다
+  function frame(now) {
+    var k = last ? 1 - Math.exp(-(now - last) / 140) : 0.12;
+    last = now;
+    cx += (tx - cx) * k; cy += (ty - cy) * k;
+    if (Math.abs(tx - cx) < 0.002 && Math.abs(ty - cy) < 0.002) { cx = tx; cy = ty; raf = 0; last = 0; } else { raf = requestAnimationFrame(frame); }
+    paint();
+  }
+  function kick() { if (!raf) raf = requestAnimationFrame(frame); }
+  function rest() { tx = 0; ty = 0; kick(); }
+  window.addEventListener('pointermove', function (e) {
+    if (e.pointerType !== 'mouse' || !seen || !on()) return;
+    tx = Math.max(-1, Math.min(1, e.clientX / window.innerWidth * 2 - 1));
+    ty = Math.max(-1, Math.min(1, e.clientY / window.innerHeight * 2 - 1));
+    kick();
+  }, { passive: true });
+  document.documentElement.addEventListener('mouseleave', rest);
+  function reset() { if (!on()) { cancelAnimationFrame(raf); raf = 0; last = 0; tx = ty = cx = cy = 0; paint(); } }
+  [still, fine].forEach(function (m) { if (m.addEventListener) m.addEventListener('change', reset); });
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) { seen = es[0].isIntersecting; if (!seen) rest(); }).observe(hero);
+  }
 })();
 </script>
 </body>
